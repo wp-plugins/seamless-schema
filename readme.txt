@@ -45,6 +45,8 @@ For Schema.org metadata, go to http://www.google.com/webmasters/tools/richsnippe
 
 For OpenGraph metadata, go to https://developers.facebook.com/tools/debug/
 
+For Twitter site cards, go to https://cards-dev.twitter.com/validator
+
 = I have Schema.org validation errors. What can I do? =
 
 Your theme may already have its own Schema.org implementation that causes issues. Try with another theme or disable Seamless Schema.

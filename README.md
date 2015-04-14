@@ -50,6 +50,7 @@ How can I validate the Schema.org metadata of my web page ?
 
 * For Schema.org metadata, go to [http://www.google.com/webmasters/tools/richsnippets](http://www.google.com/webmasters/tools/richsnippets)
 * For OpenGraph metadata, go to [https://developers.facebook.com/tools/debug/](https://developers.facebook.com/tools/debug/)
+* For Twitter site cards, go to [https://cards-dev.twitter.com/validator](https://cards-dev.twitter.com/validator)
 
 I have Schema.org validation errors. What can I do?
 ---------------------------------------------------
