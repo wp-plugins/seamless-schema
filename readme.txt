@@ -53,9 +53,13 @@ Your theme may already have its own Schema.org implementation that causes issues
 
 == Changelog ==
 
+= 1.1 =
+* Added Twitter site cards support
+* Minor bugfixes
+
 = 1.0 =
 * First public release
 
-== Upgrade Notice == 
+== Upgrade Notice ==
 
 N/A

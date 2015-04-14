@@ -3,7 +3,7 @@
 Plugin Name: Seamless Schema
 Plugin URI: http://techblog.synagila.com/2014/06/02/add-schema-org-support-in-wordpress/
 Description: Seamlessly insert schema.org and Open Graph microdata into WordPress.
-Version: 1.0
+Version: 1.1
 Author: Nicolas Bernier
 Author URI: http://www.synagila.com
 License: GPL v2
@@ -30,7 +30,7 @@ License: GPL v2
 */
 
 define('SEAMLESS_SCHEMA_BASE', plugin_dir_path(__FILE__));
-define('SEAMLESS_SCHEMA_VER', '1.0');
+define('SEAMLESS_SCHEMA_VER', '1.1');
 define('SEAMLESS_SCHEMA_URL', plugins_url('/' . basename(dirname(__FILE__))));
 
 // Enable excerpt support for pages
@@ -123,7 +123,7 @@ add_action('wp',      'seamless_schema_register_header_buffer_callback');
  */
 function seamless_schema_buffer_end()
 {
-	ob_end_flush();
+	@ob_end_flush();
 }
 add_action('wp_head', 'seamless_schema_buffer_end');
 
@@ -176,14 +176,74 @@ function seamless_schema_head()
 				break;
 			}
 
-	// Retrieving additional opengraph properties from custom fields
+	// Display Twitter card metatags
+
+	// Determine card type
+	switch(seamless_schema_get_metadata()->type)
+	{
+		case 'ImageObject':
+			$cardType = 'photo';
+			break;
+
+		case 'Product':
+			$cardType = 'photo';
+			break;
+
+		default:
+			if (!empty(seamless_schema_get_metadata()->data['image']) || !empty(seamless_schema_get_metadata()->data['image']))
+				$cardType = 'summary_large_image';
+			else
+				$cardType = 'summary';
+			break;
+	}
+
+	// Display card type
+	echo "\n" . '<meta property="twitter:card" content="' . $cardType . '" />';
+
+	// Display site's Twitter username (twitter:site)
+	if (get_option('seamless_schema_twitter_site'))
+	{
+		$siteTwitter = trim(str_replace('@', '', get_option('seamless_schema_twitter_site')));
+
+		if (!empty($siteTwitter))
+			echo "\n" . '<meta property="twitter:site" content="@' . esc_html($siteTwitter) . '" />';
+	}
+
+	// Display author's Twitter username (twitter:creator)
+	if (!empty(seamless_schema_get_metadata()->userTwitter))
+	{
+		$userTwitter = trim(str_replace('@', '', seamless_schema_get_metadata()->userTwitter));
+
+		if (!empty($userTwitter))
+			echo "\n" . '<meta property="twitter:creator" content="@' . esc_html($userTwitter) . '" />';
+	}
+
+	// Display Twitter card properties
+	$propertyMapping = array(
+		'twitter:title'        => array('name'),
+		'twitter:description'  => array('description'),
+		'twitter:image'        => array('image', 'thumbnailUrl'),
+		'twitter:url'          => array('url'),
+	);
+
+	foreach($propertyMapping as $twitterProperty => $schemaProperties)
+		foreach($schemaProperties as $schemaProperty)
+			if (!empty(seamless_schema_get_metadata()->data[$schemaProperty]))
+			{
+				echo "\n" . '<meta property="' . $twitterProperty . '" content="' . esc_attr(seamless_schema_get_metadata()->data[$schemaProperty]) . '" />';
+				break;
+			}
+
+	// Retrieving additional OpenGraph and Twitter properties from custom fields
 	if (!empty(seamless_schema_get_metadata()->post->ID))
 	{
 		$metadata = get_metadata('post', seamless_schema_get_metadata()->post->ID);
 		foreach($metadata as $dataName => $dataValues)
-			if (preg_match('/^og_(.+)$/i', $dataName, $matches))
+		{
+			if (preg_match('/^(og|twitter)_(.+)$/i', $dataName, $matches))
 				foreach ($dataValues as $dataValue)
-					echo "\n" . '<meta property="' . esc_attr($matches[1]) . '" content="' . esc_attr($dataValue) . '" />';
+					echo "\n" . '<meta property="' . strtolower(esc_attr($matches[1])) . ':' . strtolower(esc_attr($matches[2])) . '" content="' . esc_attr($dataValue) . '" />';
+		}
 	}
 
 	echo "\n";
@@ -211,3 +271,18 @@ function seamless_schema_init()
 	load_plugin_textdomain('seamless-schema', false, basename(dirname(__FILE__)) . '/languages');
 }
 add_action('plugins_loaded', 'seamless_schema_init');
+
+/**
+ * Add profile fields to users
+ * @param array $profile_fields
+ * @return array
+ */
+function seamless_schema_modify_contact_methods($profile_fields)
+{
+	// Add Twitter username for site cards
+	if (empty($profile_fields['twitter']))
+		$profile_fields['twitter'] = __("Twitter username", 'seamless-schema');
+
+	return $profile_fields;
+}
+add_filter('user_contactmethods', 'seamless_schema_modify_contact_methods');

@@ -140,7 +140,29 @@ class SeamlessSchemaSettingsPage
 		<?php
 			if (!$opt)
 			{
-				echo esc_html(__('Settings list', 'seamless-schema'));
+				?>
+
+				<h3><?php echo esc_html(__('General parameters', 'seamless-schema')); ?></h3>
+
+				<form method="post" id="post">
+
+					<input type="hidden" name="wp_schema_meta_box_nonce" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>" />
+					<table class="form-table">
+						<tbody>
+							<tr>
+								<th scope="row"><label for="twitter_site"><?php echo __('Site Twitter account', 'seamless-schema'); ?></label></th>
+								<td><input type="text" class="medium-text" value="<?php echo esc_html('@' . get_option('seamless_schema_twitter_site')) ?>" id="twitter_site" name="twitter_site"></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<?php	submit_button(); ?>
+
+				</form>
+
+				<h3><?php echo esc_html(__('Schema parameters', 'seamless-schema')); ?></h3>
+
+				<?php
 
 				// Generate menu
 				if ($this->hasPolylang())
@@ -186,6 +208,16 @@ class SeamlessSchemaSettingsPage
 	 */
 	public function saveForm($section, $locale)
 	{
+		// Saving general parameters
+		if (empty($section))
+		{
+			$twitterSite = trim(str_replace('@', '', @$_POST['twitter_site']));
+
+			update_option('seamless_schema_twitter_site', $twitterSite);
+
+			return;
+		}
+
 		// Get metadata
 		$metadata = array();
 		foreach($_POST as $name => $value)

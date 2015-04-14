@@ -146,7 +146,10 @@ class SeamlessSchemaMetadata
 		// Author
 		$author = get_userdata($this->post->post_author);
 		if (!empty($author) && !empty($author->data->display_name))
+		{
 			$this->data['author'] = $author->data->display_name;
+			$this->userTwitter = get_user_meta($this->post->post_author, 'twitter', true);
+		}
 
 		// Image
 		$thumbnailId = get_post_thumbnail_id($this->post->ID);
@@ -203,6 +206,9 @@ class SeamlessSchemaMetadata
 		$titleParts = explode('—', wp_title('—', false, 'right'));
 		array_pop($titleParts);
 		$this->data['name'] = trim(preg_replace('/\s+/', ' ', implode(' — ', $titleParts)));
+
+		// URL
+		$this->data['url'] = get_site_url() . $_SERVER['REQUEST_URI'];
 
 		// Site description
 		$this->data['description'] = trim(get_bloginfo('description'));

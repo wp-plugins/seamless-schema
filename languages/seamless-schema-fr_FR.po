@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Seamless Schema v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-28 18:58+0100\n"
-"PO-Revision-Date: 2014-05-28 19:01+0100\n"
+"POT-Creation-Date: 2015-04-14 11:46+0100\n"
+"PO-Revision-Date: 2015-04-14 11:47+0100\n"
 "Last-Translator: Nicolas Bernier <nicolas.bernier@synagila.com>\n"
 "Language-Team: Synagila <nicolas.bernier@synagila.com>\n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ../\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/class.seamless_schema.php:52
@@ -39,7 +39,8 @@ msgstr "Nombre"
 msgid "Date"
 msgstr "Date"
 
-#: includes/class.seamless_schema.php:73 includes/class.seamless_schema.php:78
+#: includes/class.seamless_schema.php:73
+#: includes/class.seamless_schema.php:78
 #: includes/class.seamless_schema.php:83
 msgid "ISO 8601"
 msgstr "ISO 8601"
@@ -98,7 +99,22 @@ msgstr "Paramètres par défaut"
 msgid "Seamless Schema Settings"
 msgstr "Paramètres de Seamless Schema"
 
-#: includes/class.seamless_schema_settings.php:143
-#: includes/class.seamless_schema_settings.php:166
+#: includes/class.seamless_schema_settings.php:145
+msgid "General parameters"
+msgstr "Paramètres généraux"
+
+#: includes/class.seamless_schema_settings.php:153
+msgid "Site Twitter account"
+msgstr "Compte Twitter du site"
+
+#: includes/class.seamless_schema_settings.php:163
+msgid "Schema parameters"
+msgstr "Paramètres Schema"
+
+#: includes/class.seamless_schema_settings.php:188
 msgid "Settings list"
 msgstr "Liste des paramètres"
+
+#: seamless-schema.php:284
+msgid "Twitter username"
+msgstr "Compte Twitter"
