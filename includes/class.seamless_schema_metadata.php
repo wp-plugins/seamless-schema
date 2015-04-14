@@ -155,16 +155,18 @@ class SeamlessSchemaMetadata
 		$thumbnailId = get_post_thumbnail_id($this->post->ID);
 		if (!empty($thumbnailId) && empty($this->data['image']))
 		{
-			// Call standard hooks
-			$size = apply_filters('post_thumbnail_size', 'medium');
+			foreach(array('thumbnailUrl' => 'large', 'image' => 'full') as $fieldName => $imageSize)
+			{
+				// Call standard hooks
+				$size = apply_filters('post_thumbnail_size', $imageSize);
+				do_action('begin_fetch_post_thumbnail_html', $this->post->ID, $thumbnailId, $size);
 
-			do_action('begin_fetch_post_thumbnail_html', $this->post->ID, $thumbnailId, $size);
-			if (in_the_loop())
-				update_post_thumbnail_cache();
+				if (in_the_loop())
+					update_post_thumbnail_cache();
 
-			$thumbnailSrc = wp_get_attachment_image_src($thumbnailId, $size);
-
-			$this->data['thumbnailUrl'] = $this->data['image'] = $thumbnailSrc[0];
+				$thumbnailSrc = wp_get_attachment_image_src($thumbnailId, $size);
+				$this->data[$fieldName] = $thumbnailSrc[0];
+			}
 		}
 
 		// At this point, we have the standard values

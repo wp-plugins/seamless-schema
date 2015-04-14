@@ -65,6 +65,13 @@ Screenshots
 Changelog
 =========
 
+### 1.2
+
+* Added support for Facebook admins (fb:admins) and Facebook application ID (fb:app_id) meta tags.
+* Thumbnail image sizes have been optimized to match Facebook's and Twitter's requirements and provide maximum visibility:
+** The "thumbnailUrl" Schema.org property and the Twitter site card image now use the large version of the featured image, instead of the medium one.
+** The "image" Schema.org property and the Open Graph image now use the featured image at its full size, instead of the medium one.
+
 ### 1.1
 
 * Added Twitter site cards support

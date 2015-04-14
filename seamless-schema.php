@@ -3,7 +3,7 @@
 Plugin Name: Seamless Schema
 Plugin URI: http://techblog.synagila.com/2014/06/02/add-schema-org-support-in-wordpress/
 Description: Seamlessly insert schema.org and Open Graph microdata into WordPress.
-Version: 1.1
+Version: 1.2
 Author: Nicolas Bernier
 Author URI: http://www.synagila.com
 License: GPL v2
@@ -30,7 +30,7 @@ License: GPL v2
 */
 
 define('SEAMLESS_SCHEMA_BASE', plugin_dir_path(__FILE__));
-define('SEAMLESS_SCHEMA_VER', '1.1');
+define('SEAMLESS_SCHEMA_VER', '1.2');
 define('SEAMLESS_SCHEMA_URL', plugins_url('/' . basename(dirname(__FILE__))));
 
 // Enable excerpt support for pages
@@ -168,6 +168,14 @@ function seamless_schema_head()
 	// Display OpenGraph metatags
 	echo "\n" . '<meta property="og:type" content="' . $ogType . '" />';
 
+	// Facebook admins
+	if (get_option('seamless_schema_fb_admins'))
+		echo "\n" . '<meta property="fb:admins" content="' . get_option('seamless_schema_fb_admins') . '" />';
+
+	// Facebook application ID
+	if (get_option('seamless_schema_fb_app_id'))
+		echo "\n" . '<meta property="fb:app_id" content="' . get_option('seamless_schema_fb_app_id') . '" />';
+
 	foreach($propertyMapping as $ogProperty => $schemaProperties)
 		foreach($schemaProperties as $schemaProperty)
 			if (!empty(seamless_schema_get_metadata()->data[$schemaProperty]))
@@ -222,7 +230,7 @@ function seamless_schema_head()
 	$propertyMapping = array(
 		'twitter:title'        => array('name'),
 		'twitter:description'  => array('description'),
-		'twitter:image'        => array('image', 'thumbnailUrl'),
+		'twitter:image'        => array('thumbnailUrl', 'image'),
 		'twitter:url'          => array('url'),
 	);
 

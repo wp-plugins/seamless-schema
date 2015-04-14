@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Seamless Schema v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-14 11:46+0100\n"
-"PO-Revision-Date: 2015-04-14 11:47+0100\n"
+"POT-Creation-Date: 2015-04-14 18:14+0100\n"
+"PO-Revision-Date: 2015-04-14 18:15+0100\n"
 "Last-Translator: Nicolas Bernier <nicolas.bernier@synagila.com>\n"
 "Language-Team: Synagila <nicolas.bernier@synagila.com>\n"
 "Language: fr_FR\n"
@@ -103,18 +103,30 @@ msgstr "Paramètres de Seamless Schema"
 msgid "General parameters"
 msgstr "Paramètres généraux"
 
-#: includes/class.seamless_schema_settings.php:153
+#: includes/class.seamless_schema_settings.php:154
 msgid "Site Twitter account"
 msgstr "Compte Twitter du site"
 
-#: includes/class.seamless_schema_settings.php:163
+#: includes/class.seamless_schema_settings.php:159
+msgid "Facebook admin IDs"
+msgstr "Identifiants des admins Facebook"
+
+#: includes/class.seamless_schema_settings.php:162
+msgid "Separate IDs with commas"
+msgstr "Séparez les identifiants avec des virgules"
+
+#: includes/class.seamless_schema_settings.php:167
+msgid "Facebook application ID"
+msgstr "Identifiant de l'application Facebook"
+
+#: includes/class.seamless_schema_settings.php:178
 msgid "Schema parameters"
 msgstr "Paramètres Schema"
 
-#: includes/class.seamless_schema_settings.php:188
+#: includes/class.seamless_schema_settings.php:203
 msgid "Settings list"
 msgstr "Liste des paramètres"
 
-#: seamless-schema.php:284
+#: seamless-schema.php:292
 msgid "Twitter username"
 msgstr "Compte Twitter"

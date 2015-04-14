@@ -149,10 +149,25 @@ class SeamlessSchemaSettingsPage
 					<input type="hidden" name="wp_schema_meta_box_nonce" value="<?php echo wp_create_nonce(basename(__FILE__)); ?>" />
 					<table class="form-table">
 						<tbody>
+
 							<tr>
 								<th scope="row"><label for="twitter_site"><?php echo __('Site Twitter account', 'seamless-schema'); ?></label></th>
 								<td><input type="text" class="medium-text" value="<?php echo esc_html('@' . get_option('seamless_schema_twitter_site')) ?>" id="twitter_site" name="twitter_site"></td>
 							</tr>
+
+							<tr>
+								<th scope="row"><label for="fb_admins"><?php echo __('Facebook admin IDs', 'seamless-schema'); ?></label></th>
+								<td>
+									<input type="text" class="medium-text" value="<?php echo esc_html(get_option('seamless_schema_fb_admins')) ?>" id="fb_admins" name="fb_admins">
+									<p class="description"><?php echo __('Separate IDs with commas', 'seamless-schema'); ?></p>
+								</td>
+							</tr>
+
+							<tr>
+								<th scope="row"><label for="fb_app_id"><?php echo __('Facebook application ID', 'seamless-schema'); ?></label></th>
+								<td><input type="text" class="medium-text" value="<?php echo esc_html(get_option('seamless_schema_fb_app_id')) ?>" id="fb_app_id" name="fb_app_id"></td>
+							</tr>
+
 						</tbody>
 					</table>
 
@@ -211,9 +226,9 @@ class SeamlessSchemaSettingsPage
 		// Saving general parameters
 		if (empty($section))
 		{
-			$twitterSite = trim(str_replace('@', '', @$_POST['twitter_site']));
-
-			update_option('seamless_schema_twitter_site', $twitterSite);
+			update_option('seamless_schema_twitter_site', trim(str_replace('@', '', @$_POST['twitter_site'])));
+			update_option('seamless_schema_fb_admins', trim(preg_replace('/[^0-9]+/', ',', @$_POST['fb_admins']), ','));
+			update_option('seamless_schema_fb_app_id', trim(preg_replace('/[^0-9]+/', ',', @$_POST['fb_app_id']), ','));
 
 			return;
 		}
