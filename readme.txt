@@ -21,9 +21,11 @@ Seamless schema automatically inserts Schema.org and Open Graph metadata inside 
 
 == Configuration ==
 
-Configure the default page type and metadata and for the homepage. By clicking *Settings* / *Seamless Schema* in the admin page. This is optional since Wordpress' values (page title, description and header image) are used by default.
+Configure the default page type and metadata and for the homepage. By clicking *Settings* / *Seamless Schema* in the admin page. This is optional since Wordpress' values (page title, description and header image) are used by default. You can also set the Twitter username of your website for the Twitter site cards from here.
 
 If you have Polylang installed, you can set per-language settings.
+
+Authors can fill their Twitter username in their profile for the Twitter site cards.
 
 == How to use ==
 
@@ -33,7 +35,7 @@ You can add extra metadata and override the default ones such as the name, descr
 
 The metadata is added in meta tags in the page header so it's totally invisible. However, only canonical properties can be added. For more complex types such as home address and product review, you have to add manually the metadata in the HTML code of your post. Have a look at the Schema.org website for more information about the structure.
 
-Additional OpenGraph tags can be added in posts, pages and attachments as custom fields prefixed by `og_`. For example, to add the tag `og:my_tag`, add a custom field named `og_og:my_tag` with the value you want.
+Additional OpenGraph and Twitter tags can be added in posts, pages and attachments as custom fields prefixed by `og_` or `twitter_`. For example, to add the tag `og:my_tag`, add a custom field named `og_og:my_tag` with the value you want.
 
 == Frequently Asked Questions ==
 
@@ -42,6 +44,8 @@ Additional OpenGraph tags can be added in posts, pages and attachments as custom
 For Schema.org metadata, go to http://www.google.com/webmasters/tools/richsnippets
 
 For OpenGraph metadata, go to https://developers.facebook.com/tools/debug/
+
+For Twitter site cards, go to https://cards-dev.twitter.com/validator
 
 = I have Schema.org validation errors. What can I do? =
 
